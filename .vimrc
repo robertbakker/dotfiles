@@ -25,6 +25,9 @@ call plug#begin()
 " Sensible defaults which everyone can agree on
 Plug 'tpope/vim-sensible'
 
+" Project drawer
+Plug 'tpope/vim-vinegar'
+
 " Fuzzy file finding
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -34,6 +37,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " Show a status bar with useful information
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Add ranger file exploring
 Plug 'francoiscabrol/ranger.vim'
@@ -200,4 +204,9 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Conoline config
 let g:conoline_auto_enable = 1
+
+" Airline config
+let g:airline_theme = 'ravenpower'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
