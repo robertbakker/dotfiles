@@ -39,7 +39,10 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
 " Show git difference in the 'gutter'
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', {'on': 'GitGutterEnable'}
+
+" Git wrapper for Vim
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -48,3 +51,4 @@ call plug#end()
 " -------------------------------------------------------------
 " CTRL+P to open files
 nnoremap <C-p> :FZF<Enter>
+
