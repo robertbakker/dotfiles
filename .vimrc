@@ -42,6 +42,9 @@ Plug 'vim-airline/vim-airline-themes'
 " Add ranger file exploring
 Plug 'francoiscabrol/ranger.vim'
 
+" Add better Go support
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " Close window without closing buffer
 Plug 'rbgrouleff/bclose.vim'
 
@@ -57,17 +60,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Show cursor line
 Plug 'miyakogi/conoline.vim'
 
-" File explorer / drawer
-Plug 'Shougo/vimfiler.vim'
+" Faster HTML typing
+Plug 'mattn/emmet-vim'
 
 call plug#end()
-
-" -------------------------------------------------------------
-"  KEY MAPPINGS 
-" -------------------------------------------------------------
-
-" CTRL+P to open files
-nnoremap <C-p> :FZF<Enter>
 
 " -------------------------------------------------------------
 "  COC CONFIGURATION 
@@ -201,12 +197,24 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-
-" Conoline config
+" -------------------------------------------------------------
+" CONOLINE CONFIG 
+" -------------------------------------------------------------
 let g:conoline_auto_enable = 1
 
-" Airline config
+" -------------------------------------------------------------
+"  AIRLINE CONFIG 
+" -------------------------------------------------------------
 let g:airline_theme = 'ravenpower'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
+" -------------------------------------------------------------
+"  KEY MAPPINGS 
+" -------------------------------------------------------------
+
+" CTRL+P to open files
+nnoremap <C-p> :FZF<Enter>
+
+" Leader L to format code
+nnoremap <leader>l :Format<Enter>
