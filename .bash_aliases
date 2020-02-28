@@ -8,3 +8,6 @@ alias a="php artisan"
 if type nvim > /dev/null 2>&1; then
   alias vim="nvim"
 fi
+
+# Highlighted cat
+alias ccat='pygmentize -g -O style=colorful,linenos=1'
