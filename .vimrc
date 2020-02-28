@@ -3,6 +3,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+
+filetype plugin indent on
+
 syntax on
 
 " Ensure vim splits the screen horizontally below the current window
@@ -218,3 +221,6 @@ nnoremap <C-p> :FZF<Enter>
 
 " Leader L to format code
 nnoremap <leader>l :Format<Enter>
+
+
+let g:gitgutter_async=0
