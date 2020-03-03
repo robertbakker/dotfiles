@@ -25,6 +25,9 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE gui
 " -------------------------------------------------------------
 call plug#begin()
 
+" Give each bracket it's own color
+Plug 'luochen1990/rainbow'
+
 " Xcode High Contrast color scheme"
 Plug  'arzg/vim-colors-xcode'
 
@@ -225,7 +228,12 @@ let g:airline#extensions#tabline#enabled = 1
 colorscheme xcodedarkhc
 
 " -------------------------------------------------------------
-"  Signify config
+"  RAINBOW CONFIG
+" -------------------------------------------------------------
+let g:rainbow_active = 1
+
+" -------------------------------------------------------------
+"  SIGNIFY CONFIG
 " -------------------------------------------------------------
 set updatetime=100
 
