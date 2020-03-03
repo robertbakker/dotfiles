@@ -25,6 +25,9 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE gui
 " -------------------------------------------------------------
 call plug#begin()
 
+" Xcode High Contrast color scheme"
+Plug  'arzg/vim-colors-xcode'
+
 " Sensible defaults which everyone can agree on
 Plug 'tpope/vim-sensible'
 
@@ -60,7 +63,7 @@ Plug 'tpope/vim-fugitive'
 " Language Server Protocol Client
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Show cursor line
+" Show / highlight cursor line
 Plug 'miyakogi/conoline.vim'
 
 " Faster HTML typing
@@ -211,6 +214,11 @@ let g:conoline_auto_enable = 1
 let g:airline_theme = 'ravenpower'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+
+" -------------------------------------------------------------
+"  XCODE HIGH CONTRACT COLOR SCHEME
+" -------------------------------------------------------------
+colorscheme xcodedarkhc
 
 " -------------------------------------------------------------
 "  KEY MAPPINGS 
