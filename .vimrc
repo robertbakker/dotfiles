@@ -55,7 +55,11 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rbgrouleff/bclose.vim'
 
 " Show git difference in the 'gutter'
-Plug 'airblade/vim-gitgutter', {'on': 'GitGutterEnable'}
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 
 " Git wrapper for Vim
 Plug 'tpope/vim-fugitive'
@@ -221,9 +225,9 @@ let g:airline#extensions#tabline#enabled = 1
 colorscheme xcodedarkhc
 
 " -------------------------------------------------------------
-"  GITGUTTER CONFIG 
+"  Signify config
 " -------------------------------------------------------------
-let g:gitgutter_async=0
+set updatetime=100
 
 " -------------------------------------------------------------
 "  KEY MAPPINGS 
