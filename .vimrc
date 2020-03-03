@@ -35,7 +35,7 @@ Plug  'arzg/vim-colors-xcode'
 Plug 'tpope/vim-sensible'
 
 " Project drawer
-Plug 'tpope/vim-vinegar'
+Plug 'preservim/nerdtree'
 
 " Fuzzy file finding
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -236,6 +236,14 @@ let g:rainbow_active = 1
 "  SIGNIFY CONFIG
 " -------------------------------------------------------------
 set updatetime=100
+
+" -------------------------------------------------------------
+"  NERDTREE CONFIG
+" -------------------------------------------------------------
+autocmd VimEnter * NERDTree
+autocmd BufEnter * NERDTreeMirror
+autocmd VimEnter * wincmd w
+let g:NERDTreeWinPos = "right"
 
 " -------------------------------------------------------------
 "  KEY MAPPINGS 
