@@ -221,6 +221,11 @@ let g:airline#extensions#tabline#enabled = 1
 colorscheme xcodedarkhc
 
 " -------------------------------------------------------------
+"  GITGUTTER CONFIG 
+" -------------------------------------------------------------
+let g:gitgutter_async=0
+
+" -------------------------------------------------------------
 "  KEY MAPPINGS 
 " -------------------------------------------------------------
 
@@ -230,5 +235,12 @@ nnoremap <C-p> :FZF<Enter>
 " Leader L to format code
 nnoremap <leader>l :Format<Enter>
 
-
-let g:gitgutter_async=0
+" Turn off arrow keys
+map         <Left>  <Nop>
+imap        <Left>  <Nop>
+map         <Right> <Nop>
+imap        <Right> <Nop>
+map         <Up>    <Nop>
+imap        <Up>    <Nop>
+map         <Down>  <Nop>
+imap        <Down>  <Nop>
