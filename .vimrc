@@ -264,3 +264,10 @@ map         <Up>    <Nop>
 imap        <Up>    <Nop>
 map         <Down>  <Nop>
 imap        <Down>  <Nop>
+
+" -------------------------------------------------------------
+"  CUSTOM COMMANDS
+" -------------------------------------------------------------
+
+" Close buffer without closing window
+command Bd bp\|bd \#
