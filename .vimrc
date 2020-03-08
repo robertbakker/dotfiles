@@ -270,4 +270,4 @@ imap        <Down>  <Nop>
 " -------------------------------------------------------------
 
 " Close buffer without closing window
-command Bd bp\|bd \#
+command! Bd bp|bd #
