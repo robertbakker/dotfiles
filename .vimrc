@@ -238,14 +238,6 @@ let g:rainbow_active = 1
 set updatetime=100
 
 " -------------------------------------------------------------
-"  NERDTREE CONFIG
-" -------------------------------------------------------------
-autocmd VimEnter * NERDTree
-autocmd BufEnter * NERDTreeMirror
-autocmd VimEnter * wincmd w
-let g:NERDTreeWinPos = "right"
-
-" -------------------------------------------------------------
 "  KEY MAPPINGS 
 " -------------------------------------------------------------
 
