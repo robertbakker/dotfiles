@@ -13,3 +13,6 @@ fi
 alias ccat='pygmentize -g -O style=colorful,linenos=1'
 
 alias tree='tree -I "node_modules|vendor"'
+
+# Because ll is not a default on Ubuntu
+alias ll='ls -l'

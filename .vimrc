@@ -257,6 +257,8 @@ imap        <Up>    <Nop>
 map         <Down>  <Nop>
 imap        <Down>  <Nop>
 
+" Vim emmet TAB expansion
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " -------------------------------------------------------------
 "  CUSTOM COMMANDS
 " -------------------------------------------------------------
