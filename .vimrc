@@ -2,7 +2,8 @@ set nocompatible
 set tabstop=2
 set shiftwidth=2
 set expandtab
-
+set ignorecase
+set smartcase
 
 filetype plugin indent on
 
@@ -66,6 +67,9 @@ endif
 
 " Git wrapper for Vim
 Plug 'tpope/vim-fugitive'
+
+" Comment stuff out
+Plug 'tpope/vim-commentary'
 
 " Language Server Protocol Client
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -259,6 +263,12 @@ imap        <Down>  <Nop>
 
 " Vim emmet TAB expansion
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" Comment out stuff
+imap <C-_> <ESC>:Commentary<cr>
+vmap <C-_> :Commentary<cr>
+map <C-_> :Commentary<cr>
+
 " -------------------------------------------------------------
 "  CUSTOM COMMANDS
 " -------------------------------------------------------------

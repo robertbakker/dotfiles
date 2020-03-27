@@ -16,3 +16,6 @@ alias tree='tree -I "node_modules|vendor"'
 
 # Because ll is not a default on Ubuntu
 alias ll='ls -l'
+
+# Ensure unicode
+alias tmux='tmux -u'
