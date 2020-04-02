@@ -19,3 +19,31 @@ alias ll='ls -l'
 
 # Ensure unicode
 alias tmux='tmux -u'
+
+# PHP versions
+
+UNAME=$( command -v uname)
+
+case $( "${UNAME}" | tr '[:upper:]' '[:lower:]') in
+  linux*)
+  alias php-versions='sudo update-alternatives --list php'
+
+  php-switch() {
+    sudo update-alternatives --set php /usr/bin/php"$1"
+  }
+
+    ;;
+  darwin*)
+    printf 'darwin\n'
+    ;;
+  msys*|cygwin*|mingw*)
+    # or possible 'bash on windows'
+    printf 'windows\n'
+    ;;
+  nt|win*)
+    printf 'windows\n'
+    ;;
+  *)
+    printf 'unknown\n'
+    ;;
+esac
