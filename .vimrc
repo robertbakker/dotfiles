@@ -4,10 +4,10 @@ set shiftwidth=2
 set expandtab
 set ignorecase
 set smartcase
-
+set background=dark 
 filetype plugin indent on
 
-syntax on
+syntax enable
 
 " Ensure vim splits the screen horizontally below the current window
 set splitbelow
@@ -26,11 +26,14 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE gui
 " -------------------------------------------------------------
 call plug#begin()
 
+" Formatting Clojure code through REPL
+Plug 'venantius/vim-cljfmt'
+
 " Give each bracket it's own color
 Plug 'luochen1990/rainbow'
 
-" Xcode High Contrast color scheme"
-Plug  'arzg/vim-colors-xcode'
+" Vim color scheme reproduction of the official JetBrains IDE Darcula theme
+Plug 'doums/darcula'
 
 " Sensible defaults which everyone can agree on
 Plug 'tpope/vim-sensible'
@@ -42,21 +45,22 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Automatically create matching brackets
-Plug 'jiangmiao/auto-pairs'
-
 " Show a status bar with useful information
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Add ranger file exploring
-Plug 'francoiscabrol/ranger.vim'
+" Hard mode
+Plug 'takac/vim-hardtime'
+
 
 " Add better Go support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Close window without closing buffer
 Plug 'rbgrouleff/bclose.vim'
+
+" HashiCorp (HCL Syntax)
+Plug 'jvirtanen/vim-hcl'
 
 " Show git difference in the 'gutter'
 if has('nvim') || has('patch-8.0.902')
@@ -67,6 +71,11 @@ endif
 
 " Git wrapper for Vim
 Plug 'tpope/vim-fugitive'
+
+" Clojure REPL support
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-salve'
+Plug 'tpope/vim-fireplace'
 
 " Comment stuff out
 Plug 'tpope/vim-commentary'
@@ -129,6 +138,7 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <F2> <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -222,14 +232,25 @@ let g:conoline_auto_enable = 1
 " -------------------------------------------------------------
 "  AIRLINE CONFIG 
 " -------------------------------------------------------------
-let g:airline_theme = 'ravenpower'
+" let g:airline_theme = 'ravenpower'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
 " -------------------------------------------------------------
-"  XCODE HIGH CONTRACT COLOR SCHEME
+"  COLOR SCHEME
 " -------------------------------------------------------------
-colorscheme xcodedarkhc
+colorscheme darcula 
+" This is only necessary if you use "set termguicolors".
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" fixes glitch? in colors when using vim with tmux
+set background=dark
+set t_Co=256
+
+if (has("termguicolors"))
+  set termguicolors
+endif 
 
 " -------------------------------------------------------------
 "  RAINBOW CONFIG
@@ -264,6 +285,9 @@ imap        <Down>  <Nop>
 " Vim emmet TAB expansion
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
+" Escape terminal with ESC
+tnoremap <Esc> <C-\><C-n>
+
 " Comment out stuff
 imap <C-_> <ESC>:Commentary<cr>
 vmap <C-_> :Commentary<cr>
@@ -275,3 +299,10 @@ map <C-_> :Commentary<cr>
 
 " Close buffer without closing window
 command! Bd bp|bd #
+
+autocmd BufNewFile,BufRead *.hcl set filetype=hcl
+autocmd BufNewFile,BufRead *.pkr.hcl set filetype=hcl
+
+" HARD MODE ON
+"let g:hardtime_default_on = 1
+
