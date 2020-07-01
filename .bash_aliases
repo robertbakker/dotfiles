@@ -12,7 +12,7 @@ fi
 # Highlighted cat
 alias ccat='pygmentize -g -O style=colorful,linenos=1'
 
-alias tree='tree -I "node_modules|vendor"'
+alias tree='tree -I "node_modules|vendor|var"'
 
 # Because ll is not a default on Ubuntu
 alias ll='ls -l'

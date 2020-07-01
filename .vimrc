@@ -1,4 +1,5 @@
 set nocompatible
+set guioptions+=m
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -26,6 +27,12 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE gui
 " -------------------------------------------------------------
 call plug#begin()
 
+" VLIME (common lisp)
+" Plug 'vlime/vlime'
+
+" SLIMV (common lisp)
+Plug 'kovisoft/slimv'
+
 " Formatting Clojure code through REPL
 Plug 'venantius/vim-cljfmt'
 
@@ -45,6 +52,13 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" PHP formatting
+Plug 'stephpy/vim-php-cs-fixer'
+" PHP Syntax
+Plug 'StanAngeloff/php.vim'
+" PHPUnit
+Plug 'c9s/phpunit.vim'
+
 " Show a status bar with useful information
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -52,6 +66,11 @@ Plug 'vim-airline/vim-airline-themes'
 " Hard mode
 Plug 'takac/vim-hardtime'
 
+" Track the engine.
+Plug 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
 
 " Add better Go support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -76,6 +95,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-salve'
 Plug 'tpope/vim-fireplace'
+
+" Autosave
+Plug '907th/vim-auto-save'
 
 " Comment stuff out
 Plug 'tpope/vim-commentary'
@@ -262,6 +284,23 @@ let g:rainbow_active = 1
 " -------------------------------------------------------------
 set updatetime=100
 
+
+" -------------------------------------------------------------
+"  PHPUNIT CONFIG
+" -------------------------------------------------------------
+" the directory that contains your phpunit test cases.
+let g:phpunit_testroot = 'tests'
+
+" the directory that contains source files
+let g:phpunit_srcroot = 'src'
+
+" the location of your phpunit file.
+let g:phpunit_bin = './vendor/bin/phpunit'
+
+" php unit command line options
+let g:phpunit_options = ["--stop-on-failure"]
+
+
 " -------------------------------------------------------------
 "  KEY MAPPINGS 
 " -------------------------------------------------------------
@@ -285,8 +324,12 @@ imap        <Down>  <Nop>
 " Vim emmet TAB expansion
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-" Escape terminal with ESC
-tnoremap <Esc> <C-\><C-n>
+" Escape terminal with ESC and properly close FZF (cancellation)
+" https://github.com/junegunn/fzf.vim/issues/544
+if has("nvim")
+  au TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
+  au FileType fzf tunmap <buffer> <Esc>
+endif
 
 " Comment out stuff
 imap <C-_> <ESC>:Commentary<cr>
@@ -306,3 +349,31 @@ autocmd BufNewFile,BufRead *.pkr.hcl set filetype=hcl
 " HARD MODE ON
 "let g:hardtime_default_on = 1
 
+" Auto format file
+let g:php_cs_fixer_path = "/home/robert/.php/php-cs-fixer"
+let g:php_cs_fixer_rules = "@PSR2"
+let g:php_cs_fixer_verbose = 1
+" autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+
+" Turn on Autosave
+let g:auto_save = 1  " enable AutoSave on Vim startup
+
+" Define W as write command because I keep accidentally typing it when doing :w
+command! W :w
+
+" No Ex mode plz
+map q: <Nop>
+nnoremap Q <nop>
+
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" VLIME
+" let g:vlime_enable_autodoc = v:true
+" let g:vlime_window_settings = {'sldb': {'pos': 'belowright', 'vertical': v:true}, 'inspector': {'pos': 'belowright', 'vertical': v:true}, 'preview': {'pos': 'belowright', 'size': v:null, 'vertical': v:true}}
