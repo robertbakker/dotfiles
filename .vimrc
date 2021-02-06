@@ -6,8 +6,11 @@ set expandtab
 set ignorecase
 set smartcase
 set background=dark 
-filetype plugin indent on
+set clipboard+=unnamedplus
 
+filetype plugin indent on
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
 syntax enable
 
 " Ensure vim splits the screen horizontally below the current window
@@ -27,15 +30,6 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE gui
 " -------------------------------------------------------------
 call plug#begin()
 
-" VLIME (common lisp)
-" Plug 'vlime/vlime'
-
-" SLIMV (common lisp)
-Plug 'kovisoft/slimv'
-
-" Formatting Clojure code through REPL
-Plug 'venantius/vim-cljfmt'
-
 " Give each bracket it's own color
 Plug 'luochen1990/rainbow'
 
@@ -45,12 +39,12 @@ Plug 'doums/darcula'
 " Sensible defaults which everyone can agree on
 Plug 'tpope/vim-sensible'
 
-" Project drawer
-Plug 'preservim/nerdtree'
-
 " Fuzzy file finding
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" Ranger
+Plug 'francoiscabrol/ranger.vim'
 
 " PHP formatting
 Plug 'stephpy/vim-php-cs-fixer'
@@ -71,9 +65,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Close window without closing buffer
 Plug 'rbgrouleff/bclose.vim'
-
-" HashiCorp (HCL Syntax)
-Plug 'jvirtanen/vim-hcl'
 
 " Show git difference in the 'gutter'
 if has('nvim') || has('patch-8.0.902')
@@ -340,15 +331,6 @@ autocmd BufNewFile,BufRead *.pkr.hcl set filetype=hcl
 " HARD MODE ON
 "let g:hardtime_default_on = 1
 
-" Auto format file
-let g:php_cs_fixer_path = "/home/robert/.php/php-cs-fixer"
-let g:php_cs_fixer_rules = "@PSR2"
-let g:php_cs_fixer_verbose = 1
-" autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
-
-" Turn on Autosave
-let g:auto_save = 1  " enable AutoSave on Vim startup
-
 " Define W as write command because I keep accidentally typing it when doing :w
 command! W :w
 
@@ -356,15 +338,5 @@ command! W :w
 map q: <Nop>
 nnoremap Q <nop>
 
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" VLIME
-" let g:vlime_enable_autodoc = v:true
-" let g:vlime_window_settings = {'sldb': {'pos': 'belowright', 'vertical': v:true}, 'inspector': {'pos': 'belowright', 'vertical': v:true}, 'preview': {'pos': 'belowright', 'size': v:null, 'vertical': v:true}}
+" Manual trigger COC autocomplete
+inoremap <silent><expr> <C-k> coc#refresh()
