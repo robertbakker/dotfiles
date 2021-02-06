@@ -1,5 +1,29 @@
 # Symfony Console
-alias c="php bin/console"
+symfony_console() {
+  if docker-compose exec php true;then
+    echo "Running inside Docker Compose PHP service"
+    docker-compose exec php php bin/console -vv --no-debug $@
+  else
+    echo "Running locally"
+    command php bin/console -vv --no-debug $@
+  fi
+}
+alias c=symfony_console
+
+# Composer
+php_composer() {
+  if docker-compose run --rm composer true;then
+    echo "Running through Docker Compose: composer service"
+    docker-compose run --rm composer $@
+  elif docker-compose exec php true;then
+    echo "Running through Docker Compose: php service"
+    docker-compose exec php composer $@
+  else
+    echo "Running locally"
+    command composer $@
+  fi
+}
+alias composer=php_composer
 
 # Laravel Artisan
 alias a="php artisan"

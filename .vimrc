@@ -66,12 +66,6 @@ Plug 'vim-airline/vim-airline-themes'
 " Hard mode
 Plug 'takac/vim-hardtime'
 
-" Track the engine.
-Plug 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-
 " Add better Go support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
@@ -95,9 +89,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-salve'
 Plug 'tpope/vim-fireplace'
-
-" Autosave
-Plug '907th/vim-auto-save'
 
 " Comment stuff out
 Plug 'tpope/vim-commentary'
