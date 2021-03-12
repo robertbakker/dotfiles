@@ -25,6 +25,18 @@ php_composer() {
 }
 alias composer=php_composer
 
+# Run Psalm
+psalm_run() {
+  if docker-compose exec php true;then
+    echo "Running inside Docker Compose PHP service"
+    docker-compose exec php php ./vendor/bin/psalm $@
+  else
+    echo "Running locally"
+    command php ./vendor/bin/psalm $@
+  fi
+}
+alias psalm=psalm_run
+
 # Laravel Artisan
 alias a="php artisan"
 
@@ -58,16 +70,16 @@ case $( "${UNAME}" | tr '[:upper:]' '[:lower:]') in
 
     ;;
   darwin*)
-    printf 'darwin\n'
+#    printf 'darwin\n'
     ;;
   msys*|cygwin*|mingw*)
     # or possible 'bash on windows'
-    printf 'windows\n'
+#    printf 'windows\n'
     ;;
   nt|win*)
-    printf 'windows\n'
+#    printf 'windows\n'
     ;;
   *)
-    printf 'unknown\n'
+#    printf 'unknown\n'
     ;;
 esac

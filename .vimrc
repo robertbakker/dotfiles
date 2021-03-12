@@ -43,15 +43,8 @@ Plug 'tpope/vim-sensible'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Ranger
-Plug 'francoiscabrol/ranger.vim'
-
 " PHP formatting
 Plug 'stephpy/vim-php-cs-fixer'
-" PHP Syntax
-Plug 'StanAngeloff/php.vim'
-" PHPUnit
-Plug 'c9s/phpunit.vim'
 
 " Show a status bar with useful information
 Plug 'vim-airline/vim-airline'
@@ -76,16 +69,14 @@ endif
 " Git wrapper for Vim
 Plug 'tpope/vim-fugitive'
 
-" Clojure REPL support
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-salve'
-Plug 'tpope/vim-fireplace'
-
 " Comment stuff out
 Plug 'tpope/vim-commentary'
 
 " Language Server Protocol Client
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Tab Nine Autocomplete
+Plug 'zxqfl/tabnine-vim'
 
 " Show / highlight cursor line
 Plug 'miyakogi/conoline.vim'
@@ -266,23 +257,6 @@ let g:rainbow_active = 1
 " -------------------------------------------------------------
 set updatetime=100
 
-
-" -------------------------------------------------------------
-"  PHPUNIT CONFIG
-" -------------------------------------------------------------
-" the directory that contains your phpunit test cases.
-let g:phpunit_testroot = 'tests'
-
-" the directory that contains source files
-let g:phpunit_srcroot = 'src'
-
-" the location of your phpunit file.
-let g:phpunit_bin = './vendor/bin/phpunit'
-
-" php unit command line options
-let g:phpunit_options = ["--stop-on-failure"]
-
-
 " -------------------------------------------------------------
 "  KEY MAPPINGS 
 " -------------------------------------------------------------
@@ -329,7 +303,7 @@ autocmd BufNewFile,BufRead *.hcl set filetype=hcl
 autocmd BufNewFile,BufRead *.pkr.hcl set filetype=hcl
 
 " HARD MODE ON
-"let g:hardtime_default_on = 1
+" let g:hardtime_default_on = 1
 
 " Define W as write command because I keep accidentally typing it when doing :w
 command! W :w
