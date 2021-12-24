@@ -43,12 +43,35 @@ composer_command() {
 }
 alias composer=composer_command
 
+# Node
+node_command() {
+  if has_docker_compose_service "node"
+  then
+    echo "Found a 'node' service defined in Docker Compose environment (docker-compose.yml), running..."
+    docker-compose exec node $@
+  else
+    command node $@
+  fi
+}
+alias yarn=yarn_command
+
+# Yarn
+yarn_command() {
+  if has_docker_compose_service "node" && docker-compose exec node which yarn 
+  then
+    echo "Found a 'yarn' command inside a 'node' service defined in Docker Compose environment (docker-compose.yml), running..."
+    docker-compose exec node yarn $@
+  else
+    command yarn $@
+  fi
+}
+alias yarn=yarn_command
+
 # Symfony Console
 symfony_console() {
-    echo "Found a 'bin/console' inside 'php' service defined in Docker Compose environment (docker-compose.yml), running..."
   if has_docker_compose_service "php" && docker-compose exec php test -f "bin/console" 
   then
-    echo "Running inside Docker Compose PHP service"
+    echo "Found a 'bin/console' inside 'php' service defined in Docker Compose environment (docker-compose.yml), running..."
     docker-compose exec php php bin/console -vv --no-debug $@
   else
     command php bin/console -vv --no-debug $@
