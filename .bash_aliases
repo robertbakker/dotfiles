@@ -1,29 +1,60 @@
+is_docker_compose() {
+  if docker-compose ps -q >/dev/null 2>&1
+  then
+      return 0
+  else
+      return 1
+  fi
+}
+
+has_docker_compose_service() {
+  services=$(docker-compose ps --services)
+  if printf "$services" | grep -Fxq "$1"
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
+php_command() {
+  if has_docker_compose_service "php"
+  then
+    echo "Found a 'php' service defined in Docker Compose environment (docker-compose.yml), running..."
+    docker-compose exec php php $@
+  else
+    command php $@
+  fi
+}
+alias php=php_command
+
+composer_command() {
+  if has_docker_compose_service "composer"
+  then
+    echo "Found a 'composer' service defined in Docker Compose environment (docker-compose.yml), running..."
+    docker-compose run --rm composer $@
+  elif has_docker_compose_service "php" && docker-compose exec php which composer
+  then
+    echo "Found a 'composer' command inside 'php' service defined in Docker Compose environment (docker-compose.yml), running..."
+    docker-compose exec php composer $@
+  else
+    command composer $@
+  fi
+}
+alias composer=composer_command
+
 # Symfony Console
 symfony_console() {
-  if docker-compose exec php true;then
+    echo "Found a 'bin/console' inside 'php' service defined in Docker Compose environment (docker-compose.yml), running..."
+  if has_docker_compose_service "php" && docker-compose exec php test -f "bin/console" 
+  then
     echo "Running inside Docker Compose PHP service"
     docker-compose exec php php bin/console -vv --no-debug $@
   else
-    echo "Running locally"
     command php bin/console -vv --no-debug $@
   fi
 }
 alias c=symfony_console
-
-# Composer
-php_composer() {
-  if docker-compose run --rm composer true;then
-    echo "Running through Docker Compose: composer service"
-    docker-compose run --rm composer $@
-  elif docker-compose exec php true;then
-    echo "Running through Docker Compose: php service"
-    docker-compose exec php composer $@
-  else
-    echo "Running locally"
-    command composer $@
-  fi
-}
-alias composer=php_composer
 
 # Run Psalm
 psalm_run() {
