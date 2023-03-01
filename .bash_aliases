@@ -1,3 +1,27 @@
+hh_ssh_keygen() {
+  if [ -z $1 ]; then
+    echo "Must give a name (alphanumeric, lowercase and dashes/underscores allowed) for first argument"
+    return 1
+  fi
+
+  if [[ "$1" =~ [^-_a-z0-9] ]]; then
+    echo "Name argument is not only alphanumeric, lowercase or dashes/underscores"
+    return 1
+  fi
+
+  name=happyhorizon_$1
+
+  FILE=~/.ssh/$name
+
+  if test -f "$FILE"; then
+    echo "A prefix key with name $name already exists. ($FILE)"
+    return 1
+  fi
+
+  echo "ssh-keygen -C \"robertbakker@happyhorizon.com\" -t ed25519-sk -f $FILE"
+  ssh-keygen -C "robertbakker@happyhorizon.com"  -t ed25519-sk -f $FILE
+}
+
 is_docker_compose() {
   if docker-compose ps -q >/dev/null 2>&1
   then
@@ -53,7 +77,7 @@ node_command() {
     command node $@
   fi
 }
-alias yarn=yarn_command
+alias node=node_command
 
 # Yarn
 yarn_command() {
@@ -137,3 +161,8 @@ case $( "${UNAME}" | tr '[:upper:]' '[:lower:]') in
 #    printf 'unknown\n'
     ;;
 esac
+
+function pip-install-save {
+    pip3 install --force-reinstall $1 && pip3 freeze | grep $1 >> requirements.txt
+}
+
